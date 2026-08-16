@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小笨象科技 · 门店评分提升与标准化运营方案</title>
+<style>
+:root{
+  --blue:#1d4fd7; --blue-d:#163da8; --ink:#1f2430; --muted:#6b7280;
+  --line:#e5e7eb; --bg:#f3f5fa; --orange:#f59e0b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Microsoft YaHei","PingFang SC","Helvetica Neue",Arial,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.75; font-size:15px;}
+.page{max-width:920px;margin:0 auto;background:#fff;
+  box-shadow:0 2px 24px rgba(29,79,215,.08);}
+
+/* 封面 */
+.cover{background:linear-gradient(135deg,#163da8 0%,#1d4fd7 55%,#2f6bff 100%);
+  color:#fff;padding:64px 56px 48px;position:relative;overflow:hidden;}
+.cover::after{content:"";position:absolute;right:-90px;top:-90px;width:280px;height:280px;
+  border-radius:50%;background:rgba(255,255,255,.08);}
+.cover::before{content:"";position:absolute;right:40px;bottom:-70px;width:180px;height:180px;
+  border-radius:50%;background:rgba(255,255,255,.06);}
+.cover .brand{font-size:13px;letter-spacing:4px;opacity:.85;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.4);display:inline-block;padding:4px 14px;border-radius:20px;margin-bottom:26px;}
+.cover h1{font-size:34px;font-weight:800;line-height:1.35;margin-bottom:14px;letter-spacing:1px;}
+.cover .sub{font-size:16px;opacity:.92;margin-bottom:8px;}
+.cover .meta{font-size:13px;opacity:.75;margin-top:6px;}
+.stats{display:flex;gap:0;margin-top:34px;background:rgba(255,255,255,.12);
+  border-radius:12px;overflow:hidden;}
+.stats .s{flex:1;padding:16px 10px;text-align:center;}
+.stats .s + .s{border-left:1px solid rgba(255,255,255,.18);}
+.stats .n{font-size:24px;font-weight:800;color:#ffd97a;}
+.stats .t{font-size:12px;opacity:.85;margin-top:2px;}
+
+/* 正文 */
+.content{padding:40px 56px 56px;}
+h2{font-size:21px;font-weight:800;color:var(--blue);margin:44px 0 16px;
+  padding:10px 16px;background:linear-gradient(90deg,rgba(29,79,215,.08),transparent);
+  border-left:5px solid var(--blue);border-radius:0 8px 8px 0;}
+h3{font-size:16px;font-weight:700;color:var(--ink);margin:26px 0 10px;
+  padding-left:12px;border-left:3px solid var(--orange);}
+h4{font-size:15px;font-weight:700;margin:18px 0 8px;color:var(--blue-d);}
+p{margin:10px 0;}
+strong{color:var(--blue-d);}
+ul,ol{margin:10px 0 10px 22px;}
+li{margin:5px 0;}
+
+/* 表格 */
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px;
+  box-shadow:0 1px 6px rgba(0,0,0,.06);border-radius:8px;overflow:hidden;}
+.data-table thead th{background:var(--blue);color:#fff;font-weight:600;padding:9px 10px;text-align:left;white-space:nowrap;}
+.data-table tbody td{padding:8px 10px;border-bottom:1px solid var(--line);}
+.data-table tbody tr:nth-child(even){background:#f8faff;}
+.data-table tbody tr:hover{background:#eef3ff;}
+.r-high{background:#e3f5e9 !important;color:#0e7a3d;font-weight:700;}
+.r-mid{background:#e8f1ff !important;color:#1d4fd7;font-weight:600;}
+.r-amber{background:#fff4e0 !important;color:#b45309;font-weight:600;}
+.r-low{background:#fde8e8 !important;color:#b91c1c;font-weight:800;}
+
+/* 引用/提示框 */
+.note{background:#f0f5ff;border-left:4px solid var(--blue);border-radius:0 8px 8px 0;
+  padding:12px 18px;margin:14px 0;color:#374151;font-size:14px;}
+.note p{margin:4px 0;}
+.divider{border:none;border-top:1px dashed #c9d4ee;margin:30px 0;}
+
+/* 目录 */
+.toc{background:#f8faff;border:1px solid var(--line);border-radius:12px;
+  padding:20px 26px;margin-bottom:34px;}
+.toc-title{font-size:13px;font-weight:700;color:var(--blue);letter-spacing:3px;margin-bottom:10px;}
+.toc ol{list-style:none;margin:0;padding:0;}
+.toc-h2{margin:8px 0 4px;font-weight:700;}
+.toc-h2 a{color:var(--blue-d);text-decoration:none;}
+.toc-h3{padding-left:20px;font-size:13.5px;color:#4b5563;}
+.toc-h3 a{color:#4b5563;text-decoration:none;}
+.toc a:hover{text-decoration:underline;color:var(--orange);}
+
+/* 页脚 */
+.footer{text-align:center;padding:18px;color:#9ca3af;font-size:12px;
+  border-top:1px solid var(--line);}
+
+@media print{
+  body{background:#fff;font-size:12.5px;}
+  .page{box-shadow:none;max-width:100%;}
+  .cover{padding:30px 30px 26px;}
+  .content{padding:20px 30px;}
+  h2{page-break-after:avoid;margin-top:24px;}
+  .data-table, .note, h3, h4{page-break-inside:avoid;}
+  .stats .n{color:#163da8;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="cover">
+    <div class="brand">小笨象科技 · 面试方案</div>
+    <h1>门店评分提升与标准化运营方案</h1>
+    <div class="sub">应聘岗位：运营经理&nbsp;&nbsp;|&nbsp;&nbsp;2026 年面试面谈版</div>
+    <div class="meta">数据基于面试准备期间实际采集 · 抖音（全国） + 大众点评（苏州 15 家门店）</div>
+    <div class="stats">
+      <div class="s"><div class="n">1433</div><div class="t">抖音真实评论</div></div>
+      <div class="s"><div class="n">59</div><div class="t">相关视频</div></div>
+      <div class="s"><div class="n">15</div><div class="t">苏州门店实测</div></div>
+      <div class="s"><div class="n">3.4~4.3</div><div class="t">门店评分区间</div></div>
+      <div class="s"><div class="n">90天</div><div class="t">落地计划</div></div>
+    </div>
+  </header>
+
+  <div class="content">
+    ['<nav class="toc"><div class="toc-title">目录 CONTENTS</div><ol>', '<li class="toc-h2"><a href="#h2-1">〇、为什么这份方案值得您看——我已经开始做功课了</a></li>', '<li class="toc-h2"><a href="#h2-2">一、现状诊断：差评到底在说什么？</a></li>', '<li class="toc-h3"><a href="#h3-1">1.0 大众点评·苏州全部门店评分对比（面试实测数据）</a></li>', '<li class="toc-h3"><a href="#h3-2">1.1 差评主题分布（基于抖音 1433 条评论中的负面内容）</a></li>', '<li class="toc-h3"><a href="#h3-3">1.2 三个关键结论</a></li>', '<li class="toc-h2"><a href="#h2-3">二、差评整改：三大工程 + 一套响应机制</a></li>', '<li class="toc-h3"><a href="#h3-4">2.1 工程一：计费透明化（止血项，30 天内完成）</a></li>', '<li class="toc-h3"><a href="#h3-5">2.2 工程二：设备与卫生标准（30 天内上线）</a></li>', '<li class="toc-h3"><a href="#h3-6">2.3 工程三：团购核销顺畅（随工程二同步）</a></li>', '<li class="toc-h3"><a href="#h3-7">2.4 差评响应与挽回机制（贯穿始终）</a></li>', '<li class="toc-h2"><a href="#h2-4">三、高分店 vs 低分店：差距怎么找、店长怎么管</a></li>', '<li class="toc-h3"><a href="#h3-8">3.1 诊断框架：评分是"分项"的加总，不是玄学</a></li>', '<li class="toc-h3"><a href="#h3-9">3.2 店长管理：用"目标共建"替代"下命令"</a></li>', '<li class="toc-h3"><a href="#h3-10">3.3 月度培训体系（"每月怎么培训店长"的直接答案）</a></li>', '<li class="toc-h2"><a href="#h2-5">四、好评运营：把好体验变成好评分</a></li>', '<li class="toc-h2"><a href="#h2-6">五、核心：可复用方法论——"人走机制留"</a></li>', '<li class="toc-h3"><a href="#h3-11">5.1 SOP 化（把经验写成文档）</a></li>', '<li class="toc-h3"><a href="#h3-12">5.2 制度化（把执行绑进考核）</a></li>', '<li class="toc-h3"><a href="#h3-13">5.3 数字化（把过程变成数据）</a></li>', '<li class="toc-h2"><a href="#h2-7">六、90 天落地计划（试点 → 铺开 → 固化）</a></li>', '<li class="toc-h2"><a href="#h2-8">七、今天想和老板对齐的 5 个问题</a></li>', '</ol></nav>']
+    <h1>小笨象科技 · 门店评分提升与标准化运营方案</h1>
+<p><strong>岗位：运营经理 | 面试方案（面谈版）</strong></p>
+<hr class="divider" />
+<h2 id="h2-1">〇、为什么这份方案值得您看——我已经开始做功课了</h2>
+<p>在准备本次面试的过程中，我实际抓取并分析了小笨象在<strong>抖音 + 大众点评</strong>两个平台的真实用户数据：</p>
+<ul>
+<li>抖音（<strong>全国范围</strong>）：覆盖 59 个相关视频、<strong>1433 条真实评论</strong>（含品牌专属视频的曝光贴、官方号回应贴）</li>
+<li>大众点评（<strong>苏州 15 家门店</strong>）：实际采集评分、分项评分（服务/性价比/环境）与最新评论（见第一章 1.0 全部门店对比表；全国其他城市门店可入职后按城市补齐，方法论一致）</li>
+<li>确认了门店端数据：苏州园区菁英公寓旗舰店 <strong>368 条地点评价</strong>、3.1 万人"想去"；横塘远发金屋旗舰店 1516 人"想去"；各门店宣传评分存在 <strong>4.6 与 4.8 的差异</strong></li>
+<li>外部佐证：黑猫投诉平台存在"小笨象智慧洗车偷换概念限制使用"的公开投诉</li>
+</ul>
+<p>也就是说：<strong>"差评在说什么、哪家店差在哪一维"我已经有了一手数据</strong>，下面的方案不是空谈，而是基于真实反馈的整改与机制设计。</p>
+<blockquote class="note">
+<p>注：大众点评剩余门店与全部评论列表（受平台风控限制）可入职后申请商户后台补齐。</p>
+</blockquote>
+<hr class="divider" />
+<h2 id="h2-2">一、现状诊断：差评到底在说什么？</h2>
+<h3 id="h3-1">1.0 大众点评·苏州全部门店评分对比（面试实测数据）</h3>
+<p>面试准备阶段已通过大众点评实际采集苏州 15 家门店数据（评分/分项/最新评论）：</p>
+<table class="data-table">
+<thead>
+<tr>
+<th>门店</th>
+<th>总评分</th>
+<th>服务</th>
+<th>性价比</th>
+<th>环境</th>
+<th>点评数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>宝龙广场店</td>
+<td class="r-high"><strong>4.3</strong></td>
+<td class="r-high">4.2</td>
+<td class="r-high">4.3</td>
+<td class="r-high">4.2</td>
+<td>196</td>
+</tr>
+<tr>
+<td>菁英公寓旗舰店</td>
+<td class="r-mid">4.1</td>
+<td class="r-mid">4.1</td>
+<td class="r-high">4.2</td>
+<td class="r-mid">4.1</td>
+<td>95</td>
+</tr>
+<tr>
+<td>星友汇店</td>
+<td class="r-mid">4.1</td>
+<td class="r-mid">4.1</td>
+<td class="r-high">4.2</td>
+<td class="r-mid">4.1</td>
+<td>160</td>
+</tr>
+<tr>
+<td>南湖路店</td>
+<td class="r-mid">4.1</td>
+<td class="r-high">4.2</td>
+<td class="r-mid">4.1</td>
+<td class="r-high">4.2</td>
+<td>113</td>
+</tr>
+<tr>
+<td>金鑫大运城店</td>
+<td class="r-mid">4.0</td>
+<td class="r-amber">3.9</td>
+<td class="r-mid">4.1</td>
+<td class="r-mid">4.0</td>
+<td>107</td>
+</tr>
+<tr>
+<td>凯翔大厦店</td>
+<td class="r-mid">4.0</td>
+<td class="r-amber">3.9</td>
+<td class="r-mid">4.1</td>
+<td class="r-amber">3.9</td>
+<td>154</td>
+</tr>
+<tr>
+<td>木渎华夏五金城店</td>
+<td class="r-mid">4.0</td>
+<td class="r-amber">3.9</td>
+<td class="r-mid">4.0</td>
+<td class="r-amber">3.9</td>
+<td>68</td>
+</tr>
+<tr>
+<td>横塘远发金屋店</td>
+<td class="r-amber">3.9</td>
+<td class="r-amber">3.9</td>
+<td class="r-mid">4.0</td>
+<td class="r-mid">4.0</td>
+<td>46</td>
+</tr>
+<tr>
+<td>墅浦生活荟店</td>
+<td class="r-low"><strong>3.8</strong></td>
+<td class="r-low">3.8</td>
+<td class="r-amber">3.9</td>
+<td class="r-low">3.8</td>
+<td>30</td>
+</tr>
+<tr>
+<td>国泰新村店</td>
+<td class="r-low"><strong>3.8</strong></td>
+<td class="r-low"><strong>3.6</strong></td>
+<td class="r-amber">3.9</td>
+<td class="r-low"><strong>3.5</strong></td>
+<td>29</td>
+</tr>
+<tr>
+<td>越溪店</td>
+<td class="r-low"><strong>3.8</strong></td>
+<td class="r-low">3.7</td>
+<td class="r-low">3.7</td>
+<td class="r-low">3.7</td>
+<td>91</td>
+</tr>
+<tr>
+<td>黄埭中翔生活广场店</td>
+<td class="r-low"><strong>3.4</strong></td>
+<td class="r-low"><strong>3.4</strong></td>
+<td class="r-low">3.7</td>
+<td class="r-low">3.7</td>
+<td>62</td>
+</tr>
+<tr>
+<td>天狮公园店 / 黄埭维也纳 / 郭巷尹东荟</td>
+<td>数据不足</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>5~10</td>
+</tr>
+</tbody>
+</table>
+<p><strong>三个直接结论</strong>：
+1. <strong>全部门店评分集中在 3.4~4.3，没有任何一家到 4.5+</strong>——品牌整体有提升空间，"高分店"也只是相对高
+2. <strong>分项评分暴露短板</strong>：国泰新村店环境 3.5/服务 3.6、黄埭中翔店服务 3.4——低分店都有明确的分项短板可针对性整改；越溪店三项全 3.7（全面平庸）
+3. <strong>点评数与评分负相关不成立</strong>：黄埭中翔 62 条点评却只有 3.4 分——差评密度高，不是"样本少"能解释的</p>
+<p><strong>跨平台印证（点评 × 抖音高度一致）</strong>：
+- 设备：天狮公园店"用过3个坑位，2个坑位水枪漏水" ↔ 抖音"不是水枪坏就是泡沫枪坏"
+- 卫生：菁英公寓店"擦车的毛巾还是不太敢用" ↔ 抖音"毛巾只有脏的"
+- 好评点：多处"9.9元团购性价比绝了" ↔ 抖音"洗了两次了挺不错的"
+- 差评样板：国泰新村店"很糟糕"（7星差评）需重点复盘</p>
+<blockquote class="note">
+<p>注：以上为今晚实测数据（2026-08）。抖音为全国范围搜索；大众点评为苏州范围（15/38 家），全国其他城市门店入职后可快速补齐，方法论不变。</p>
+</blockquote>
+<h3 id="h3-2">1.1 差评主题分布（基于抖音 1433 条评论中的负面内容）</h3>
+<table class="data-table">
+<thead>
+<tr>
+<th>排名</th>
+<th>差评主题</th>
+<th>数量</th>
+<th>典型原话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>计费/扣费争议</strong></td>
+<td>47</td>
+<td>"没用水为什么要扣费？""难怪我第一次只用水就花了20"</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>卫生/毛巾</strong></td>
+<td>22</td>
+<td>"毛巾只有脏的""唯亭连个毛巾都没有"</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>服务/态度</strong></td>
+<td>18</td>
+<td>"这种套路或者不合理的商家会被市场淘汰掉"</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>设备故障/维护</strong></td>
+<td>15</td>
+<td>"不是水枪坏就是泡沫枪坏"</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>充值/会员</strong></td>
+<td>13</td>
+<td>"大额充值都是玩金融骗人的"（对行业充值模式的质疑）</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>团购/券核销</strong></td>
+<td>5</td>
+<td>"团的券核销了之后没开机，又重新买了一次才开"</td>
+</tr>
+<tr>
+<td>7</td>
+<td>洗车效果</td>
+<td>2</td>
+<td>"洗了跟没洗一样"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h3-3">1.2 三个关键结论</h3>
+<ol>
+<li><strong>差评不是"态度"问题，是"规则透明 + 设备维护 + 卫生标准"三个工程问题</strong>——这恰恰是最容易标准化解决的，也是运营经理最该管的。</li>
+<li><strong>计费争议是最大痛点（47 条）</strong>，且有真实曝光视频（"小笨象露娜洗车你是穷疯了是吗"）在传播——这是<strong>必须优先止血</strong>的事项，否则再多好评也压不住。</li>
+<li><strong>评分高低差别的本质是可复制的执行差</strong>：高评分店不是运气好，是"规则讲得清、设备是好的、现场是干净的"。这三件事完全可以用 SOP + 考核固化到每家店。</li>
+</ol>
+<hr class="divider" />
+<h2 id="h2-3">二、差评整改：三大工程 + 一套响应机制</h2>
+<h3 id="h3-4">2.1 工程一：计费透明化（止血项，30 天内完成）</h3>
+<table class="data-table">
+<thead>
+<tr>
+<th>动作</th>
+<th>具体做法</th>
+<th>责任人</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>规则明示</td>
+<td>门店入口立牌 + 设备屏幕大字展示计费规则（是否出水才计费、暂停规则、单价），<strong>进店先见规则</strong></td>
+<td>店长</td>
+</tr>
+<tr>
+<td>语音提示</td>
+<td>开机播报计费规则语音；扣费开始/暂停时有明确状态提示</td>
+<td>总部统一录制</td>
+</tr>
+<tr>
+<td>暂停键优化</td>
+<td>暂停按钮加大、贴"暂停=不扣费"提示；屏幕常显"当前状态：出水/暂停/计费中"</td>
+<td>总部/设备商</td>
+</tr>
+<tr>
+<td>扣费明细</td>
+<td>结账小票/微信推送展示扣费明细（用了多少水/时间、单价、总额）</td>
+<td>总部系统</td>
+</tr>
+<tr>
+<td>争议退费</td>
+<td>授予店长<strong>单次全额退费权</strong>（金额小、换口碑，算作获客成本）</td>
+<td>店长</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h3-5">2.2 工程二：设备与卫生标准（30 天内上线）</h3>
+<ul>
+<li><strong>每日开店点检表</strong>：水枪/泡沫枪/吸尘器/毛巾柜/地面，15 项，开店前 10 分钟完成，拍照上传</li>
+<li><strong>设备报修 SLA</strong>：店长上报后 24 小时内响应、72 小时内修复；超时自动升级区域经理</li>
+<li><strong>毛巾管理</strong>：统一配置"清洗+消毒+烘干"设备；每店毛巾按量配齐并<strong>公示更换日期</strong>；有条件的门店改为一次性毛巾卷</li>
+<li><strong>现场 5S 巡检</strong>：地面无积水、设备无故障标识、耗材补充（泡沫/蜡水）</li>
+</ul>
+<h3 id="h3-6">2.3 工程三：团购核销顺畅（随工程二同步）</h3>
+<ul>
+<li>核销 SOP：扫码核销 → 确认开机 → 异常处理（核销失败立即现场重开，不二次收费）</li>
+<li>后台监控：核销失败率纳入店长周报，异常门店系统预警</li>
+</ul>
+<h3 id="h3-7">2.4 差评响应与挽回机制（贯穿始终）</h3>
+<ul>
+<li><strong>48 小时响应</strong>：所有差评 48 小时内平台公开回复 + 电话回访（回复话术统一模板）</li>
+<li><strong>差评预警</strong>：门店评分跌破阈值（如抖音 &lt; 4.5）自动通知区域经理介入</li>
+<li><strong>周差评复盘</strong>：每周汇总差评案例，写入知识库，每月培训用</li>
+</ul>
+<hr class="divider" />
+<h2 id="h2-4">三、高分店 vs 低分店：差距怎么找、店长怎么管</h2>
+<h3 id="h3-8">3.1 诊断框架：评分是"分项"的加总，不是玄学</h3>
+<p>对低分店做<strong>六维诊断</strong>（每店一份诊断报告，与高店对标）：</p>
+<table class="data-table">
+<thead>
+<tr>
+<th>维度</th>
+<th>检查内容</th>
+<th>数据来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>环境</td>
+<td>场地整洁、灯光、指示牌</td>
+<td>神秘顾客 + 巡检</td>
+</tr>
+<tr>
+<td>设备</td>
+<td>完好率、故障响应时长</td>
+<td>点检表 + 报修记录</td>
+</tr>
+<tr>
+<td>卫生</td>
+<td>毛巾、地面、卫生间</td>
+<td>巡检 + 差评关键词</td>
+</tr>
+<tr>
+<td>规则</td>
+<td>计费透明、店员解释能力</td>
+<td>现场暗访</td>
+</tr>
+<tr>
+<td>服务</td>
+<td>差评响应时效、电话回访</td>
+<td>后台数据</td>
+</tr>
+<tr>
+<td>性价比</td>
+<td>价格/套餐 vs 周边竞品</td>
+<td>竞品调研</td>
+</tr>
+</tbody>
+</table>
+<blockquote class="note">
+<p>方法：拉取每店最近 30 天全部差评 → 按六维打标 → 与高评分店差评结构对比 → 得出"低分店到底差在哪一维"，整改就有了靶子。<strong>差评结构对比表</strong>是给老板看的最直观工具。</p>
+</blockquote>
+<h3 id="h3-9">3.2 店长管理：用"目标共建"替代"下命令"</h3>
+<p><strong>和店长怎么谈（话术框架，四步）：</strong>
+1. <strong>先给数据</strong>："你这店最近差评集中在计费，这是这三条原话，我们看怎么改"
+2. <strong>再给工具</strong>："总部已上线计费提示语音和退费权限，你直接能用"
+3. <strong>共建目标</strong>："咱们一起定个目标：这个季度评分从 4.5 到 4.7，差评减一半。你提需要什么支持"
+4. <strong>利益绑定</strong>："达成目标，季度奖金 X；连续两个季度不达标，会有调岗评估"（奖惩分明但不威胁）</p>
+<p><strong>店长 KPI 考核表（季度）</strong>：</p>
+<table class="data-table">
+<thead>
+<tr>
+<th>指标</th>
+<th>权重</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平台评分</td>
+<td>40%</td>
+<td>环比 +0.2 或维持 4.7+</td>
+</tr>
+<tr>
+<td>差评率（差评/评价数）</td>
+<td>20%</td>
+<td>≤ 8%</td>
+</tr>
+<tr>
+<td>差评响应时效（48h 内）</td>
+<td>10%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>设备完好率</td>
+<td>10%</td>
+<td>≥ 95%</td>
+</tr>
+<tr>
+<td>团购核销成功率</td>
+<td>10%</td>
+<td>≥ 99%</td>
+</tr>
+<tr>
+<td>好评引导量（评价邀请发出数）</td>
+<td>10%</td>
+<td>每店每周 ≥ 50</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h3-10">3.3 月度培训体系（"每月怎么培训店长"的直接答案）</h3>
+<p><strong>月度"1+1"培训：每月 1 次总部集中培训（2 小时）+ 每周门店 15 分钟微训</strong></p>
+<table class="data-table">
+<thead>
+<tr>
+<th>月份</th>
+<th>主题</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 月</td>
+<td>规则与答疑</td>
+<td>计费规则话术、现场答疑演练（背熟"没用水为什么扣费"的标准回答）</td>
+</tr>
+<tr>
+<td>第 2 月</td>
+<td>卫生与设备</td>
+<td>点检表执行、毛巾消毒流程、设备报修流程</td>
+</tr>
+<tr>
+<td>第 3 月</td>
+<td>客诉处理</td>
+<td>差评回复话术、电话回访演练、退费权限使用</td>
+</tr>
+<tr>
+<td>第 4 月</td>
+<td>好评运营</td>
+<td>评价引导话术、团购套餐讲解、会员/充值合规</td>
+</tr>
+<tr>
+<td>季度循环</td>
+<td>复训 + 认证</td>
+<td>每季度末考核认证，不合格复训</td>
+</tr>
+</tbody>
+</table>
+<p><strong>配套机制</strong>：
+- <strong>店长互访</strong>：低分店店长每月去高分店跟岗半天（传帮带），高店店长挂靠辅导低店
+- <strong>红黑榜</strong>：月度差评案例复盘会，好的表扬、差的整改，全部门店可见
+- <strong>培训留痕</strong>：每次培训签到 + 考核记录，纳入店长档案（这也是"可复用机制"的一部分）</p>
+<hr class="divider" />
+<h2 id="h2-5">四、好评运营：把好体验变成好评分</h2>
+<ul>
+<li><strong>洗后评价引导</strong>：结账后小程序/二维码引导评价，评价后送 2 元优惠券（成本可控、转化高）</li>
+<li><strong>好评点制造</strong>：免费玻璃水/胎压检测/自助擦车巾——花小钱制造记忆点（现有好评里"有免费玻璃水"就是真实好评素材）</li>
+<li><strong>曝光视频公关</strong>：对"你是穷疯了是吗"类负面视频，官方号正面回应（发一条"计费规则说明"科普视频），化危机为透明化宣传</li>
+<li><strong>团购套餐设计</strong>：引流款（低价单次）引流 + 利润款（次卡/会员），评价量靠引流款带起来</li>
+</ul>
+<hr class="divider" />
+<h2 id="h2-6">五、核心：可复用方法论——"人走机制留"</h2>
+<p>老板的核心诉求是<strong>可复制、不依赖个人</strong>。我的答案是"三化"：</p>
+<h3 id="h3-11">5.1 SOP 化（把经验写成文档）</h3>
+<ul>
+<li>《门店评分管理手册》：计费规则、卫生标准、设备点检、差评回复、核销流程——<strong>版本化管理，店长人手一册</strong></li>
+<li>《店长月度操作日历》：每月 1 号查什么、每周五做什么，照表执行</li>
+</ul>
+<h3 id="h3-12">5.2 制度化（把执行绑进考核）</h3>
+<ul>
+<li>店长 KPI 与评分/差评挂钩（见 3.2）</li>
+<li>培训认证制度：店长年度认证，不认证不上岗</li>
+<li>巡检制度：总部月度巡检 + 神秘顾客季度暗访，结果进考核</li>
+</ul>
+<h3 id="h3-13">5.3 数字化（把过程变成数据）</h3>
+<ul>
+<li><strong>门店运营看板</strong>：评分趋势、差评列表与响应时效、设备报修、核销失败率、好评引导量——五张图，区域经理一眼看清</li>
+<li>差评案例知识库：所有差评 + 处理方案入库，新人照着做就会</li>
+</ul>
+<p><strong>交接保障</strong>：我做的所有方案都落地为"文档 + 系统 + 制度"三件套，走人不带走。半年后任意一个店长或新运营经理，照着手册和看板就能维持分数——这就是"你走了店铺还是正常分数"的答案。</p>
+<hr class="divider" />
+<h2 id="h2-7">六、90 天落地计划（试点 → 铺开 → 固化）</h2>
+<table class="data-table">
+<thead>
+<tr>
+<th>阶段</th>
+<th>时间</th>
+<th>关键动作</th>
+<th>里程碑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>止血诊断</strong></td>
+<td>第 1-30 天</td>
+<td>① 全部门店计费规则排查整改 ② 设备点检+毛巾标准上线 ③ 差评 48h 响应机制 ④ 六维诊断报告（每店一份）</td>
+<td>计费类差评下降 50%</td>
+</tr>
+<tr>
+<td><strong>机制建设</strong></td>
+<td>第 31-60 天</td>
+<td>① 店长 KPI + 月度培训体系启动 ② 数据看板上线 ③ 好评引导活动上线 ④ 试点店（选 2 家低分店）重点攻坚</td>
+<td>试点店评分 +0.3</td>
+</tr>
+<tr>
+<td><strong>固化铺开</strong></td>
+<td>第 61-90 天</td>
+<td>① 《评分管理手册》v1.0 发布 ② 店长认证考核 ③ 全部门店铺开 ④ 复盘优化机制</td>
+<td>全部门店评分 ≥ 4.6，试点店 ≥ 4.8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>KPI 承诺（对老板）</strong>：
+- 3 个月：低分店评分平均 +0.3，差评率 -30%
+- 6 个月：全部门店评分 ≥ 4.7，形成可交接的完整机制文档
+- 12 个月：评分成为公司可对外宣传的"标准化的品牌资产"</p>
+<hr class="divider" />
+<h2 id="h2-8">七、今天想和老板对齐的 5 个问题</h2>
+<ol>
+<li>目前低评分门店是哪几家、各自评分构成（大众点评/抖音各占多少权重）？</li>
+<li>评分数据后台权限（大众点评商户后台、抖音来客）是否可申请？</li>
+<li>预算支持：设备改造（暂停键/语音提示）、毛巾消毒设备、评价激励券，是否有预算盘子？</li>
+<li>组织权限：店长的任免/奖惩权、区域督导是否已有？</li>
+<li>期望节奏：希望 3 个月见效还是 6 个月体系化？</li>
+</ol>
+<hr class="divider" />
+<p><em>数据来源：本方案中抖音评论数据为面试准备阶段实际采集（2026-08），采集脚本与原始数据已留存，可随时复核。</em></p>
+  </div>
+
+  <footer class="footer">小笨象科技 · 运营经理面试方案 · 数据采集于 2026-08 · 采集脚本与原始数据留存可复核</footer>
+</div>
+</body>
+</html>
